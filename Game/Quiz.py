@@ -6,6 +6,7 @@ size = request_size.json()
 size = size['tamanho']
 
 lista_respostas_certas = []
+
 lista_respostas_erradas = []
 
 
