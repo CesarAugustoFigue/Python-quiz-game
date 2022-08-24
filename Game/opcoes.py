@@ -1,6 +1,7 @@
 import program as program
 
 def opcoes_fn(size):
+    print('------------------')
     print('O que você deseja fazer?')
     print('1. Jogar')
     print('2. Verificar sua pontuação ')

@@ -2,20 +2,18 @@
 import requests
 
 def quiz_fn(size):
+    print()
     id = 1
     proxima = True
     while id <= size:
         request_quest = requests.get('http://127.0.0.1:8000/questions/{}'.format(id))
         questao = request_quest.json()
-        questao = questao['descricao']
 
         request_alt = requests.get('http://127.0.0.1:8000/alternatives/{}'.format(id))
         alternativas = request_alt.json()
-        alternativas = alternativas['alternativas']
 
         request_rsp = requests.get('http://127.0.0.1:8000/response/{}'.format(id))
         rsp = request_rsp.json()
-        rsp = rsp['resposta']
 
         Alternativa1 = ('a', alternativas[0])
         Alternativa2 = ('b', alternativas[1])
@@ -30,16 +28,17 @@ def quiz_fn(size):
         print("d)",Alternativa4[1])
         print("e)",Alternativa5[1])
 
+        letra = ""
         if rsp in Alternativa1:
             letra = Alternativa1[0]
         elif rsp in Alternativa2:
-            letra = Alternativa1[0]
+            letra = Alternativa2[0]
         elif rsp in Alternativa3:
-            letra = Alternativa1[0]
+            letra = Alternativa3[0]
         elif rsp in Alternativa4:
-            letra = Alternativa1[0]
+            letra = Alternativa4[0]
         elif rsp in Alternativa5:
-            letra = Alternativa1[0]
+            letra = Alternativa5[0]
 
         resposta = str(input('Insira sua resposta: '))
         if resposta == rsp or resposta == letra:
