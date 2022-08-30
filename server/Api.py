@@ -1,9 +1,13 @@
 from fastapi import FastAPI
-        
-questions_db = [
-    {'id':'1', 'descricao': 'Que pais tem o formato de uma bota?', 'AL1':'Butao','AL2':'Brasil','AL3':'Portugal','AL4':'Italia','AL5':'Mexico','resposta':'Italia'},
-    {'id':'2', 'descricao': 'Quem inventou a lâmpada?', 'AL1':'Graham Bell','AL2':'Steve Jobs','AL3':'Thomas Edison','AL4':'Henry Ford','AL5':'Santos Dumont','resposta':'Thomas Edison'}
-]
+import pandas as pd
+
+#dt_questoes = pd.read_csv('./dt_questoes.txt', sep=",")
+dt_questoes = pd.read_csv('dt_questoes.csv', encoding="utf-8", sep=",", header=0)
+
+questions_db = []
+for i in range(len(dt_questoes)):
+    questions_db.append({'id':i+1, 'descricao': '{}'.format(dt_questoes["descricao"][i]), 'AL1':'{}'.format(dt_questoes["AL1"][i]),'AL2':'{}'.format(dt_questoes["AL2"][i]),'AL3':'{}'.format(dt_questoes["AL3"][i]),'AL4':'{}'.format(dt_questoes["AL4"][i]),'AL5':'{}'.format(dt_questoes["AL5"][i]),'resposta':'{}'.format(dt_questoes["resposta"][i])})
+
 
 users_db = [
     {'id':'1', 'nome':'cesar', 'senha':'ferlinda'},
@@ -13,7 +17,7 @@ users_db = [
 app = FastAPI()
 
 class API:
-    @app.get("/user/{username}")   
+    @app.get("/user/{username}")
     def GetPassword(username):
         senha = ""
         for usuario in users_db:
@@ -21,11 +25,11 @@ class API:
                 senha = usuario['senha']
         return senha
 
-    @app.get("/questions/{id}")   
+    @app.get("/questions/{id}")
     def GetQuestion(id):
         questionMessage = ""
         for question in questions_db:
-            if id == question['id']:
+            if int(id) == question['id']:
                 questionMessage = question['descricao']
         return questionMessage    
     
@@ -33,7 +37,7 @@ class API:
     def GetAlternativas(id):
         alternativesMessage = []
         for question in questions_db:
-            if id == question['id']:
+            if int(id) == question['id']:
                 alternativesMessage.append(question['AL1'])
                 alternativesMessage.append(question['AL2'])
                 alternativesMessage.append(question['AL3'])
@@ -45,7 +49,7 @@ class API:
     def GetResponse(id):
         questionMessage = ""
         for question in questions_db:
-            if id == question['id']:
+            if int(id) == question['id']:
                 questionMessage = question['resposta']
         return questionMessage    
     

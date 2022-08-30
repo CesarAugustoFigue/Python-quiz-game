@@ -11,7 +11,6 @@ lista_respostas_erradas = []
 
 usuario = str(input('digite o seu usuário: '))
 senha = str(input('digite a sua senha: '))
-
     
 request_senha = requests.get('http://127.0.0.1:8000/user/{}'.format(usuario))
 senha_req = request_senha.json()
