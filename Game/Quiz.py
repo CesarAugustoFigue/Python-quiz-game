@@ -19,7 +19,7 @@ senha_req = request_senha.json()
 if senha_req != senha:
     print('Esse usuário não está cadastrado')
 else:
-    opcoes.opcoes_fn(size)
+    opcoes.opcoes_fn(size, usuario)
     
 
 

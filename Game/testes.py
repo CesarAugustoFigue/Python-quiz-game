@@ -39,7 +39,8 @@ class TestesQuiz(TestCase):
 
 
     #testes para o program quiz
-
+    def test_usuario_fn_type(self):
+        self.assertEqual(eh_string_fn(Quiz.usuario), True)
     
 
 if __name__ == '__main__':

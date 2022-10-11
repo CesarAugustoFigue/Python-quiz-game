@@ -7,7 +7,7 @@ def eh_valido_fn(val: int) -> bool:
     else:
         return False
 
-def opcoes_fn(size):
+def opcoes_fn(size, usuario):
     permissao = False
     print('------------------')
     print('O que você deseja fazer?')
@@ -18,7 +18,7 @@ def opcoes_fn(size):
     opcao = int(input('Insira uma opção: '))
     if eh_valido_fn(opcao) == True:
         if opcao == 1:
-            program.quiz_fn(size)
+            program.quiz_fn(size, usuario)
         elif opcao == 2:
             pass
         elif opcao == 3:
